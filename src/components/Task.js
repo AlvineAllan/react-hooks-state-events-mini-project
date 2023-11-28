@@ -1,11 +1,17 @@
-import React from "react";
+import React from 'react';
 
-function Task() {
+function Task({ task, onDeleteTask }) {
+  const handleDelete = () => {
+    if (onDeleteTask && typeof onDeleteTask === 'function') {
+      onDeleteTask(task.id);
+    }
+  };
+
   return (
     <div className="task">
-      <div className="label">CATEGORY HERE</div>
-      <div className="text">TEXT HERE</div>
-      <button className="delete">X</button>
+      {task && task.text && <p>{task.text}</p>}
+      {task && task.category && <p>Category: {task.category}</p>}
+      <button onClick={handleDelete}>Delete</button>
     </div>
   );
 }
